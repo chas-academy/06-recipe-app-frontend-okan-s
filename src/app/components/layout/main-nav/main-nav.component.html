@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="!(isHandset$ | async)">
+    <mat-toolbar color="primary">
+      Okan's Recipe App
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/recipes" >Recipes</a>
+      <a mat-list-item routerLink="/favorites" *ngIf="isLoggedIn">Favorites</a>
+      <span style="position:absolute; bottom: 1vh; left: 1vw;">
+        <a routerLink="/login" *ngIf="!isLoggedIn"><button mat-raised-button style="background-color: #ffd633;">Login</button></a>
+        <a routerLink="/register" *ngIf="!isLoggedIn" style="margin-left: 0.75vw;"><button mat-raised-button style="background-color: #ffd633;">Register</button></a>
+      </span>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span class="fill-space"></span>
+      <span><a href="https://okasi.me/" ><img style="height: 2.4em; margin-top: 0.5em;" src="https://okasi.me/os-logo.png"/></a></span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    
+    <h3 *ngIf="this.router.url === '/'">You shouldn't see this</h3>
+    <div style="margin: 0px auto; float: none;display: table;">
+      <router-outlet></router-outlet>
+    </div>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>
