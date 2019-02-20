@@ -1,0 +1,70 @@
+<br>
+<mat-card style="padding-bottom: 0;">
+  <mat-card-content>
+    <form #searchForm="ngForm" (ngSubmit)="searchRecipes(searchForm)" name="searchForm">
+      <mat-radio-group ngModel name="selectedCourse" required>
+        <mat-radio-button value="&allowedCourse[]=course^course-Appetizers">Appetizers</mat-radio-button>
+        <mat-radio-button style="margin: 0 2vw" value="&allowedCourse[]=course^course-Main-Dishes">Main Dishes
+        </mat-radio-button>
+        <mat-radio-button value="&allowedCourse[]=course^course-Desserts">Desserts</mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <mat-form-field style="margin-top: 1.5vh;">
+        <mat-select ngModel name="selectedAllergens" placeholder="Allergens" multiple>
+          <mat-option value="&allowedAllergy[]=394^Peanut-Free">Peanut-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=396^Dairy-Free">Dairy-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=397^Egg-Free">Egg-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=393^Gluten-Free">Gluten-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=394^Peanut-Free">Peanut-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=398^Seafood-Free">Seafood-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=399^Sesame-Free">Sesame-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=400^Soy-Free">Soy-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=401^Sulfite-Free">Sulfite-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=395^Tree+Nut-Free">Tree Nut-Free</mat-option>
+          <mat-option value="&allowedAllergy[]=392^Wheat-Free">Wheat-Free</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <mat-select ngModel name="selectedDiets" placeholder="Diets" multiple>
+          <mat-option value="&allowedDiet=387^Lacto-ovo+vegetarian">Lacto-ovo vegetarian</mat-option>
+          <mat-option value="&allowedDiet=386^Vegan">Vegan</mat-option>
+          <mat-option value="&allowedDiet=389^Ovo+vegetarian">Ovo vegetarian</mat-option>
+          <mat-option value="&allowedDiet=390^Pescetarian">Pescetarian</mat-option>
+          <mat-option value="&allowedDiet=408^Low+FODMAP">Low FODMAP</mat-option>
+          <mat-option value="&allowedDiet=388^Lacto+vegetarian">Lacto vegetarian</mat-option>
+          <mat-option value="&allowedDiet=406^Ketogenic">Ketogenic</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Search Recipes</mat-label>
+        <input ngModel matInput name="searchValue" autofocus>
+      </mat-form-field>
+      <button [disabled]="!searchForm.valid" mat-raised-button style="margin-left: 0.75vw;"
+        color="primary">SUBMIT</button>
+    </form>
+    <mat-list>
+ 
+        <span *ngIf="recipes">
+
+          <a *ngFor="let recipe of recipes; last as isLast;" routerLink="/recipe/{{ recipe.id }}" style="text-decoration: none;" >
+            <mat-list-item>
+              <h4 mat-line>{{ recipe.recipeName }}</h4>
+              <p mat-line style="opacity: 0.5;" *ngIf="recipe.attributes.cuisine">
+                {{ recipe.attributes.cuisine.join(" ") }}</p>
+              <mat-icon style="margin-left: 1vw">open_in_browser</mat-icon>
+            </mat-list-item>
+            <mat-divider *ngIf="!isLast"></mat-divider>
+          </a>
+
+          <mat-list-item *ngIf="!recipes.length > 0">
+              <h2 mat-line><em>No results, please try again.</em></h2>
+          </mat-list-item>
+
+        </span>
+
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+<br>
