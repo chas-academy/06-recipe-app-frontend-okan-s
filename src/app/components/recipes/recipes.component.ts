@@ -7,7 +7,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
-  recipes: []
+  recipes: any
 
   constructor(
     private recipeService: RecipeService,
@@ -31,7 +31,8 @@ export class RecipesComponent implements OnInit {
     }
 
     this.recipeService.getRecipes(selectedOptionsFinal).subscribe(data => {
-      this.recipes = data.matches;
+      this.recipes = data
+      this.recipes = this.recipes.matches
     })
   }
 
