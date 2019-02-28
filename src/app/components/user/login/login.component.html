@@ -1,3 +1,27 @@
-<p>
-  login works!
-</p>
+<br>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="loginAccount()">
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <!-- <input type="email" ngModel matInput required name="email" autofocus> -->
+        <input matInput placeholder="Enter your email" formControlName="email" required autofocus>
+        <mat-error *ngIf="loginForm.controls['email'].hasError('required')">You must enter a value</mat-error>
+        <mat-error *ngIf="loginForm.controls['email'].hasError('email')">Not a valid email</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput required formControlName="password">
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">You must enter a value</mat-error>
+        <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">Minimum length 6 characters</mat-error>
+       
+      </mat-form-field>
+      <br>
+      <button [disabled]="!loginForm.valid" mat-raised-button
+        color="primary">LOGIN</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<br>

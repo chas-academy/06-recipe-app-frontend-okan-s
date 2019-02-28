@@ -1,6 +1,8 @@
 <br>
 <mat-card style="padding-bottom: 0;">
   <mat-card-content>
+    <mat-card-title>Search</mat-card-title>
+    <br>
     <form #searchForm="ngForm" (ngSubmit)="searchRecipes(searchForm)" name="searchForm">
       <mat-radio-group ngModel name="selectedCourse" required>
         <mat-radio-button value="&allowedCourse[]=course^course-Appetizers">Appetizers</mat-radio-button>
@@ -49,11 +51,13 @@
         <span *ngIf="recipes">
 
           <a *ngFor="let recipe of recipes; last as isLast;" routerLink="/recipe/{{ recipe.id }}" style="text-decoration: none;" >
-            <mat-list-item>
+            <mat-list-item style="height: 100%; padding-top: 1vh; padding-bottom: 1vh;">
+              <img style="height: 90px; padding-left: 2.5vw;" src="{{ recipe.imageUrlsBySize[90] }}" alt="{{ recipe.name }}">
               <h4 mat-line>{{ recipe.recipeName }}</h4>
               <p mat-line style="opacity: 0.5;" *ngIf="recipe.attributes.cuisine">
-                {{ recipe.attributes.cuisine.join(" ") }}</p>
-              <mat-icon style="margin-left: 1vw">open_in_browser</mat-icon>
+                {{ recipe.attributes.cuisine.join(" ") }}
+              </p>
+              <!-- <mat-icon style="margin-left: 1vw">open_in_browser</mat-icon> -->
             </mat-list-item>
             <mat-divider *ngIf="!isLast"></mat-divider>
           </a>

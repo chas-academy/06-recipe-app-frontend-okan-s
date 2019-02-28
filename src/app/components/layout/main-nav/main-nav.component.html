@@ -1,21 +1,35 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+      style="
+      background-image: linear-gradient(to top, #ea5455, #f46a4c, #fa8143, #fc993d, #fbb03b);
+      background-color: hsla(0,0%,100%,0.5);
+      background-blend-mode: overlay;
+      background-repeat: no-repeat;
+    "
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">
-      Okan's Recipe App
+      Frosseriet
     </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/recipes" >Recipes</a>
-      <a mat-list-item routerLink="/favorites" *ngIf="isLoggedIn">Favorites</a>
+      <a mat-list-item routerLink="/favorites" *ngIf="auth.isLoggedIn()">Favorites</a>
       <span style="position:absolute; bottom: 1vh; left: 1vw;">
-        <a routerLink="/login" *ngIf="!isLoggedIn"><button mat-raised-button style="background-color: #ffd633;">Login</button></a>
-        <a routerLink="/register" *ngIf="!isLoggedIn" style="margin-left: 0.75vw;"><button mat-raised-button style="background-color: #ffd633;">Register</button></a>
+        <a routerLink="/login" *ngIf="!auth.isLoggedIn()"><button mat-raised-button style="background-color: #ffd633;">Login</button></a>
+        <a routerLink="/register" *ngIf="!auth.isLoggedIn()" style="margin-left: 0.75vw;"><button mat-raised-button style="background-color: #ffd633;">Register</button></a>
+        <a routerLink="/profile" *ngIf="auth.isLoggedIn()"><button mat-raised-button style="background-color: #ffd633;">Profile</button></a>
+        <a (click)="auth.logout()" *ngIf="auth.isLoggedIn()" style="margin-left: 0.75vw;"><button mat-raised-button style="background-color: #ffd633;">Logout</button></a>
+
       </span>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content style="
+    background-image: linear-gradient(to right, #ffe985, #fee16d, #fed853, #fecf36, #ffc600);
+    background-color: hsla(0,0%,100%,0.5);
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    ">
     <mat-toolbar color="primary">
       <button
         type="button"
@@ -26,12 +40,17 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span class="fill-space"></span>
+      <span style="margin-right: 1.25vw;">Okan S.</span>
       <span><a href="https://okasi.me/" ><img style="height: 2.4em; margin-top: 0.5em;" src="https://okasi.me/os-logo.png"/></a></span>
     </mat-toolbar>
     <!-- Add Content Here -->
     
     <h3 *ngIf="this.router.url === '/'">You shouldn't see this</h3>
-    <div style="margin: 0px auto; float: none;display: table;">
+    <div style="
+    margin: 0px auto; 
+    float: none;
+    display: table; 
+    ">
       <router-outlet></router-outlet>
     </div>
     

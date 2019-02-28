@@ -1,10 +1,25 @@
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthenticationService } from './services/authentication.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatToolbarModule,
+} from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './components/layout/main-nav/main-nav.component';
@@ -13,6 +28,7 @@ import { RecipesComponent } from './components/recipes/recipes.component';
 import { FavoritesComponent } from './components/user/favorites/favorites.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegisterComponent } from './components/user/register/register.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +39,7 @@ import { RegisterComponent } from './components/user/register/register.component
     RegisterComponent,
     LoginComponent,
     FavoritesComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,13 +54,18 @@ import { RegisterComponent } from './components/user/register/register.component
     MatSidenavModule,
     MatListModule,
     HttpClientModule,
-    FormsModule,
     MatCheckboxModule,
     MatCardModule,
     MatSelectModule,
     MatRadioModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

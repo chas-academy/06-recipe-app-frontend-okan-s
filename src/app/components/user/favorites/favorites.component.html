@@ -1,3 +1,29 @@
-<p>
-  favorites works!
-</p>
+<br>
+<mat-card>
+  <mat-card-content>
+
+    <mat-card-title>Favorites</mat-card-title>
+
+    <mat-list>
+      <span *ngIf="recipes">
+
+          <a *ngFor="let recipe of recipes; last as isLast;" routerLink="/recipe/{{ recipe.id }}" style="text-decoration: none;" >
+            <mat-list-item>
+              <h4 mat-line>{{ recipe.name }}</h4>
+              <p mat-line style="opacity: 0.5;" *ngIf="recipe.attributes.cuisine">
+                {{ recipe.attributes.cuisine.join(" ") }}</p>
+              <mat-icon style="margin-left: 1vw">open_in_browser</mat-icon>
+            </mat-list-item>
+            <mat-divider *ngIf="!isLast"></mat-divider>
+          </a>
+
+          <mat-list-item *ngIf="!recipes.length > 0">
+              <h2 mat-line><em>No results</em></h2>
+          </mat-list-item>
+
+        </span>
+    </mat-list>
+
+  </mat-card-content>
+</mat-card>
+<br>

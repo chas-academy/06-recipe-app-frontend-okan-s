@@ -5,8 +5,9 @@
       <mat-card-title>{{ recipe.name }}</mat-card-title>
       <mat-card-subtitle *ngIf="recipe.attributes.cuisine"><em>Cuisine labeled as {{ recipe.attributes.cuisine.join(" ") }}</em></mat-card-subtitle>
       <span class="fill-space"></span>
-      <mat-card-actions *ngIf="isLoggedIn">
-          <button mat-raised-button color="accent">FAVORITE&nbsp;&nbsp;&nbsp;<mat-icon>favorite</mat-icon></button>
+      <mat-card-actions style="margin-left: auto;" *ngIf="auth.isLoggedIn()">
+        <button *ngIf="!already" (click)="favoriteRecipe()" mat-raised-button color="accent">FAVORITE&nbsp;&nbsp;&nbsp;<mat-icon>favorite</mat-icon></button>
+        <button *ngIf="already" (click)="unfavoriteRecipe()" mat-raised-button color="accent">UNFAVORITE&nbsp;&nbsp;&nbsp;<mat-icon>favorite_border</mat-icon></button>
       </mat-card-actions>
     </mat-card-header>
     <img mat-card-image src="{{ recipe.images[0].hostedLargeUrl }}" alt="{{ recipe.name }}">
@@ -14,8 +15,10 @@
       <mat-list>
         <h3 mat-subheader>Ingredients</h3>
         <mat-divider></mat-divider>
-        <mat-list-item *ngFor="let ingredient of recipe.ingredientLines; last as isLast;">
-          {{ ingredient }}
+        <mat-list-item style="height: 100%;" *ngFor="let ingredient of recipe.ingredientLines; last as isLast;">
+            <p>
+              <span>{{ ingredient }}</span>
+            </p>
           <mat-divider *ngIf="!isLast"></mat-divider>
         </mat-list-item>
       </mat-list>

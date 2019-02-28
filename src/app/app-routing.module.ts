@@ -1,3 +1,5 @@
+import { ProfileComponent } from './components/user/profile/profile.component';
+import { AuthGuardService } from './services/auth-guard.service';
 import { FavoritesComponent } from './components/user/favorites/favorites.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { NgModule } from '@angular/core';
@@ -21,15 +23,22 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent
   },
-  
+
   {
     path: 'login',
     component: LoginComponent
   },
 
   {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuardService],
+  },
+
+  {
     path: 'favorites',
-    component: FavoritesComponent
+    component: FavoritesComponent,
+    canActivate: [AuthGuardService],
   },
 
   {

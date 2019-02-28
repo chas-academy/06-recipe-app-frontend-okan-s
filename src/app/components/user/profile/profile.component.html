@@ -1,0 +1,14 @@
+<br>
+<mat-card>
+  <mat-card-content style="overflow-wrap: break-word; max-width: 30vw">
+    <mat-card-title>Profile</mat-card-title>
+    <p>
+      <b>Email:</b> {{ details?.user.email }}
+      <br>
+      <br>
+      <b>Token:</b> {{ auth.getToken() }}
+    </p>
+    <!-- <img src="https://www.gravatar.com/avatar/{{ Md5.hashStr(details?.user.email) }}" /> -->
+  </mat-card-content>
+</mat-card>
+<br>
